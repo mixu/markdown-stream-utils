@@ -4,7 +4,7 @@
   "description": "Utility functions for processing markdown files using object mode streams.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -R spec ./test/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +21,15 @@
   },
   "homepage": "https://github.com/mixu/markdown-stream-utils",
   "dependencies": {
-    "highlight.js": "^8.4.0",
-    "marked": "^0.3.2",
-    "through2": "^0.6.3"
+    "highlight.js": "~8.4.0",
+    "js-yaml": "~3.2.5",
+    "marked": "~0.3.2",
+    "through2": "~0.6.3",
+    "xtend": "^4.0.0"
+  },
+  "devDependencies": {
+    "file-fixture": "0.0.2",
+    "mds-csv": "0.0.0",
+    "wildglob": "0.0.1"
   }
 }
