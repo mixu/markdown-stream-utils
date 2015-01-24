@@ -49,7 +49,6 @@ pi.fromArray([ __dirname + '/foo.md', __dirname + '/bar.md' ])
 Parses header sections in markdown files. For example, given a object with the following `content` field:
 
 ```
----
 title: Hello world
 author: foo
 ---
@@ -59,16 +58,18 @@ author: foo
 
 it will augment the existing object with two new fields: `title` and `author` with the specified values.
 
-The header section will be removed from `content`, so that only the markdown content after the `---` will be kept in the `content` key.
+The header section may be written in either JSON or YAML. There must be at least three `-` characters that separate the header from the rest of the content (on a single line). Headers may also have a beginning delimiter, e.g.:
 
-TODO:
+```
+---
+title: Hello world
+---
+# Heading
+```
 
-- yaml parsing
-- JSON parsing
-- optional first heading
-- customize:
-    - `contents` field
-    - `metadata` storage key
+The header section will be removed from `contents`, so that only the markdown content after the `---` will be kept in the `contents` key.
+
+You can customize the `contents` field as well as the destination of the metadata. To set the contents field name, pass in an options hash with `contentsKey`. To set the metadata storage key, pass the key name in `metadataKey`; if this is false (default), the metadata is merged; if it is set then the metadata is stored under a subkey.
 
 ## parseMd()
 
@@ -78,18 +79,17 @@ pipe(md.parseMd())
 
 Given an object with a `contents` field, executes `marked.lexer()` on the contents field. The new value is the lexer tree from `marked`.
 
-## highlightJS()
+## highlight()
 
 ```js
-pipe(md.highlightJS())
+pipe(md.highlight())
 ```
 
-Iterates over the lexer tree from `parseMd`, and executes a code highlighter on each code block.
+Iterates over the lexer tree from `parseMd`, and executes the highlight.js highlighter on each code block.
 
-TODO:
+You can add support for additional languages by passing a custom callback with the signature `function(code, lang) {}`, which should return either a HTML string containing the highlighted version of the code, or `false` if you want to run highlight.js on the code block.
 
-- make it take a callback (`function(code, lang) {}`)
-- customize the `contents` field
+Note that you will need a highlight.js CSS style sheet in your final output so that the styling is visible.
 
 ## annotateMdHeadings()
 
@@ -97,9 +97,24 @@ TODO:
 pipe(md.annotateMdHeadings())
 ```
 
-Iterates over the lexer tree from `parseMd`. Annotates every heading with an id, so that when converted to HTML the headings can be targeted via links.
+Iterates over the lexer tree from `parseMd`. Annotates every heading with an id, so that when converted to HTML the headings can be targeted via links. An array all the headings is produced under `headings`. The value is an array of lexer tokens with an `id` property.
 
-Also produces a list of all headings under `headings`. The value is an array of lexer tokens with an `id` property.
+For example:
+
+```
+# Test
+foo
+```
+
+results in the input object being augmented with:
+
+```
+{ headings: [ { id: 'test', text: 'foo', type: 'heading', depth: 1 } ] }
+```
+
+By default, the markdown tokens are read from the `contents` key on the input object, and written to the `headings` key.
+
+You can customize the keys used by passing in an options hash. The `contentsKey` property controls the key from which the lexer tree is read, and the `headingsKey` controls the key to which the headings are written.
 
 ## convertMd()
 
