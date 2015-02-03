@@ -30,6 +30,7 @@
   "devDependencies": {
     "file-fixture": "0.0.2",
     "mds-csv": "0.0.0",
+    "pipe-iterators": "~1.1.0",
     "wildglob": "0.0.1"
   }
 }

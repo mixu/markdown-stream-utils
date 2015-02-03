@@ -57,7 +57,7 @@ describe('highlighter test', function() {
 
       assert.equal(results[2].contents, [
         '<h1 id="test">Test</h1>',
-        '<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Zebra</span>;</span> <span class="hljs-function"><span class="hljs-keyword">def</span> </span>inspect; <span class="hljs-string">&quot;X<span class="hljs-subst">#{<span class="hljs-number">2</span> + <span class="hljs-keyword">self</span>.object_id}</span>&quot;</span> <span class="hljs-keyword">end</span> <span class="hljs-keyword">end</span></code></pre>'
+        '<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Zebra</span>;</span> <span class="hljs-function"><span class="hljs-keyword">def</span> </span>inspect; <span class="hljs-string">"X<span class="hljs-subst">#{<span class="hljs-number">2</span> + <span class="hljs-keyword">self</span>.object_id}</span>"</span> <span class="hljs-keyword">end</span> <span class="hljs-keyword">end</span></code></pre>'
       ].join('\n'));
       done();
     });
