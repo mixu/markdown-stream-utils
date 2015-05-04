@@ -2,6 +2,10 @@
 
 Utility functions for processing markdown files using object mode streams. Used by [markdown-styles](https://github.com/mixu/markdown-styles) and by [ghost-render](https://github.com/mixu/ghost-render).
 
+## Changelog
+
+`v1.1.0`: made `highlight` apply the syntax highlighting for the specific language if available in highlight.js. Added `md.marked` and added `opts` to `md.convertMd()`.
+
 # API
 
 ## Getting started
@@ -116,11 +120,20 @@ By default, the markdown tokens are read from the `contents` key on the input ob
 
 You can customize the keys used by passing in an options hash. The `contentsKey` property controls the key from which the lexer tree is read, and the `headingsKey` controls the key to which the headings are written.
 
-## convertMd()
+## convertMd(opts)
 
 ```js
 pipe(md.convertMd())
 ```
 
-Given an object with a `contents` field, executes `marked.parse()` on the contents field. The new value is the HTMLs from `marked`.
+Constructs a new parser using `marked` default options, overriding with the values from `opts` where specified (e.g. `opts.renderer` can be used to override the renderer).
 
+Given an object with a `contents` field, executes `Parser.parse()` on the contents field. The new value is the HTMLs from `marked`.
+
+## marked
+
+```js
+console.log(md.marked);
+```
+
+A reference to the `marked` library, in case you need to construct a marked.Renderer for convertMd.
