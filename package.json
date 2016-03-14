@@ -1,6 +1,6 @@
 {
   "name": "markdown-stream-utils",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Utility functions for processing markdown files using object mode streams.",
   "main": "index.js",
   "scripts": {
