@@ -46,18 +46,18 @@ describe('highlighter test', function() {
       results.sort(function(a, b) { return a.path.localeCompare(b.path); });
       assert.equal(results[0].contents, [
         '<h1 id="test">Test</h1>',
-        '<pre class="hljs"><code><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>',
-        '<span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span></code></pre>'
+        '<pre class="hljs"><code><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>',
+        '<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></code></pre>'
       ].join('\n'));
 
       assert.equal(results[1].contents, [
         '<h1 id="test">Test</h1>',
-        '<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">function</span> $<span class="hljs-title">initHighlight</span><span class="hljs-params">(<span class="hljs-keyword">block</span>, <span class="hljs-keyword">flags</span>)</span> <span class="hljs-comment">{ }</span></span></code></pre>'
+        '<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">$initHighlight</span>(<span class="hljs-params">block, flags</span>) </span>{ }</code></pre>'
       ].join('\n'));
 
       assert.equal(results[2].contents, [
         '<h1 id="test">Test</h1>',
-        '<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Zebra</span>;</span> <span class="hljs-function"><span class="hljs-keyword">def</span> </span>inspect; <span class="hljs-string">"X<span class="hljs-subst">#{<span class="hljs-number">2</span> + <span class="hljs-keyword">self</span>.object_id}</span>"</span> <span class="hljs-keyword">end</span> <span class="hljs-keyword">end</span></code></pre>'
+        '<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Zebra</span></span>; def inspect; <span class="hljs-string">"X#{2 + self.object_id}"</span> end end</code></pre>'
       ].join('\n'));
       done();
     });
@@ -93,8 +93,8 @@ describe('highlighter test', function() {
       ].join('\n'));
       assert.equal(results[1].contents, [
         '<h1 id="test">Test</h1>',
-        '<pre class="hljs"><code><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>',
-        '<span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span></code></pre>'
+        '<pre class="hljs"><code><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>',
+        '<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></code></pre>'
       ].join('\n'));
 
       done();
