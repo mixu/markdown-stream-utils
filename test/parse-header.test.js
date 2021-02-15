@@ -28,8 +28,8 @@ describe('parse header tests', function() {
     });
 
     render(dir, function(results) {
-      assert.equal(results[0].title, 'Hello world');
-      assert.equal(results[0].author, 'Anonymous');
+      assert.strictEqual(results[0].title, 'Hello world');
+      assert.strictEqual(results[0].author, 'Anonymous');
       done();
     });
   });
@@ -46,8 +46,8 @@ describe('parse header tests', function() {
     });
 
     render(dir, function(results) {
-      assert.equal(results[0].title, 'Hello world');
-      assert.equal(results[0].author, 'Anonymous');
+      assert.strictEqual(results[0].title, 'Hello world');
+      assert.strictEqual(results[0].author, 'Anonymous');
       done();
     });
   });
@@ -68,10 +68,10 @@ describe('parse header tests', function() {
     });
 
     render(dir, function(results) {
-      assert.equal(results[0].string, 'hello world');
+      assert.strictEqual(results[0].string, 'hello world');
       assert.deepEqual(results[0].arr, [ 'A', 'B', 'C' ]);
       assert.deepEqual(results[0].hash, { foo: 'bar' });
-      assert.equal(results[0].date, '2002-12-14');
+      assert.strictEqual(results[0].date, '2002-12-14');
       done();
     });
   });
@@ -94,11 +94,11 @@ describe('parse header tests', function() {
     });
 
     render(dir, function(results) {
-      assert.equal(results[0].string, 'hello world');
+      assert.strictEqual(results[0].string, 'hello world');
       assert.deepEqual(results[0].arr, [ 'A', 'B', 'C' ]);
       assert.deepEqual(results[0].hash, { foo: 'bar' });
       assert.ok(results[0].date instanceof Date);
-      assert.equal(results[0].date.getTime(), 1039824000000);
+      assert.strictEqual(results[0].date.getTime(), 1039824000000);
       done();
     });
 
@@ -137,8 +137,8 @@ describe('parse header tests', function() {
       ])
         .pipe(md.parseHeader({ contentsKey: 'text' }))
         .pipe(pi.toArray(function(results) {
-          assert.equal(results[0].title, 'Hello world');
-          assert.equal(results[0].author, 'Anonymous');
+          assert.strictEqual(results[0].title, 'Hello world');
+          assert.strictEqual(results[0].author, 'Anonymous');
           done();
         }));
   });
@@ -156,8 +156,8 @@ describe('parse header tests', function() {
       ])
         .pipe(md.parseHeader({ metadataKey: 'meta' }))
         .pipe(pi.toArray(function(results) {
-          assert.equal(results[0].meta.title, 'Hello world');
-          assert.equal(results[0].meta.author, 'Anonymous');
+          assert.strictEqual(results[0].meta.title, 'Hello world');
+          assert.strictEqual(results[0].meta.author, 'Anonymous');
           done();
         }));
 

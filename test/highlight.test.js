@@ -13,6 +13,7 @@ describe('highlighter test', function() {
     glob.stream(dir + '/*')
         .pipe(read())
         .pipe(md.parseMd())
+        .pipe(md.annotateMdHeadings())
         .pipe(md.highlight(opts))
         .pipe(md.convertMd())
         .pipe(pi.toArray(done));
@@ -44,20 +45,20 @@ describe('highlighter test', function() {
 
     render(dir, null, function(results) {
       results.sort(function(a, b) { return a.path.localeCompare(b.path); });
-      assert.equal(results[0].contents, [
+      assert.strictEqual(results[0].contents, [
         '<h1 id="test">Test</h1>',
-        '<pre class="hljs"><code><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>',
+        '<pre class="hljs"><code><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>',
         '<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></code></pre>'
       ].join('\n'));
 
-      assert.equal(results[1].contents, [
+      assert.strictEqual(results[1].contents, [
         '<h1 id="test">Test</h1>',
         '<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">$initHighlight</span>(<span class="hljs-params">block, flags</span>) </span>{ }</code></pre>'
       ].join('\n'));
 
-      assert.equal(results[2].contents, [
+      assert.strictEqual(results[2].contents, [
         '<h1 id="test">Test</h1>',
-        '<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Zebra</span></span>; def inspect; <span class="hljs-string">"X#{2 + self.object_id}"</span> end end</code></pre>'
+        '<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Zebra</span></span>; def inspect; <span class="hljs-string">&quot;X#{2 + self.object_id}&quot;</span> end end</code></pre>'
       ].join('\n'));
       done();
     });
@@ -87,13 +88,13 @@ describe('highlighter test', function() {
       return false;
     }, function(results) {
       results.sort(function(a, b) { return a.path.localeCompare(b.path); });
-      assert.equal(results[0].contents, [
+      assert.strictEqual(results[0].contents, [
         '<h1 id="test">Test</h1>',
         '<pre class="hljs"><code><span class="hljs-keyword">a</span>,<span class="hljs-keyword">b</span>,<span class="hljs-keyword">c</span></code></pre>'
       ].join('\n'));
-      assert.equal(results[1].contents, [
+      assert.strictEqual(results[1].contents, [
         '<h1 id="test">Test</h1>',
-        '<pre class="hljs"><code><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>',
+        '<pre class="hljs"><code><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>',
         '<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></code></pre>'
       ].join('\n'));
 
