@@ -4,6 +4,8 @@ Utility functions for processing markdown files using object mode streams. Used 
 
 ## Changelog
 
+`v1.6.0`: Updated all dependencies to latest versions.
+
 `v1.2.0`: Updated highlight.js and other dependencies, thanks @omnibs!
 
 `v1.1.0`: made `highlight` apply the syntax highlighting for the specific language if available in highlight.js. Added `md.marked` and added `opts` to `md.convertMd()`.
